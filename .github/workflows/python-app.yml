@@ -9,6 +9,7 @@ jobs:
     env:
       TOXENV: mypy
       GITHUB_WORKFLOW_URL:  https://github.com/${{github.repository}}/actions/runs/${{github.run_id}}
+      ID: ${{github.run_id}}
     strategy:
       matrix:
         python: [3.6, 3.7, 3.8, 3.9]
@@ -26,7 +27,7 @@ jobs:
         run: tox -e py
       - name: Mattermost Hook        
         run: |
-          echo "{\"text\":\"Build failed :exclamation:. Please look at $GITHUB_WORKFLOW_URL\"}" > mattermost.json
+          echo "{\"text\":\":exclamation: **Build failed**. Job ID: $ID. [(see details)]($GITHUB_WORKFLOW_URL)\"}" > mattermost.json
       - uses: mattermost/action-mattermost-notify@master
         env:
           MATTERMOST_WEBHOOK_URL: ${{ secrets.MATTERMOST_WEBHOOK_URL }}
