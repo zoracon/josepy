@@ -24,10 +24,10 @@ jobs:
       - name: Run Tox
         # Run tox using the version of Python in `PATH`
         run: tox -e py
-      - name: The job has succeeded
-        if: ${{ success() }}           
+      - name: The job has succeeded         
         run: |
-          echo "{\"text\":\"Success! Please look at GITHUB_WORKFLOW_URL\"}" > mattermost.json
-          - uses: mattermost/action-mattermost-notify@master
-          env:
-            MATTERMOST_WEBHOOK_URL: ${{ secrets.MATTERMOST_WEBHOOK_URL }}
+          echo "{\"text\":\"Success! Please look at $GITHUB_WORKFLOW_URL\"}" > mattermost.json
+        if: ${{ success() }}  
+      - uses: mattermost/action-mattermost-notify@master
+        env:
+          MATTERMOST_WEBHOOK_URL: ${{ secrets.MATTERMOST_WEBHOOK_URL }}
