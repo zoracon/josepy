@@ -8,6 +8,7 @@ jobs:
     runs-on: ubuntu-18.04
     env:
       TOXENV: mypy
+      GITHUB_WORKFLOW_URL:  https://github.com/${{github.repository}}/actions/runs/${{github.run_id}}
     strategy:
       matrix:
         python: [3.6, 3.7, 3.8, 3.9]
@@ -23,9 +24,10 @@ jobs:
       - name: Run Tox
         # Run tox using the version of Python in `PATH`
         run: tox -e py
-      - name: Create the Mattermost Message
+      - name: The job has succeeded
+        if: ${{ success() }}           
         run: |
-          echo "{\"text\":\"testing github action :tada:\"}" > mattermost.json
-      - uses: mattermost/action-mattermost-notify@master
-        env:
-          MATTERMOST_WEBHOOK_URL: ${{ secrets.MATTERMOST_WEBHOOK_URL }}
+          echo "{\"text\":\"Success! Please look at GITHUB_WORKFLOW_URL\"}" > mattermost.json
+          - uses: mattermost/action-mattermost-notify@master
+            env:
+              MATTERMOST_WEBHOOK_URL: ${{ secrets.MATTERMOST_WEBHOOK_URL }}
