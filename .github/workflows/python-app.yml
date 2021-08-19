@@ -1,0 +1,25 @@
+name: Python package
+
+on: [push]
+
+jobs:
+  build:
+  
+    runs-on: ubuntu-18.04
+    strategy:
+      matrix:
+        python: [3.6, 3.7, 3.8, 3.9]
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Install Dependencies
+        run: pip install tox-travis codecov
+      - name: Run Tox
+        # Run tox using the version of Python in `PATH`
+        run: tox -e py
+      - name: Run codecov
+        run: codecov
