@@ -26,8 +26,8 @@ jobs:
         run: tox -e py
       - name: The job has succeeded         
         run: |
-          echo "{\"text\":\"Success! Please look at $GITHUB_WORKFLOW_URL\"}" > mattermost.json
-        if: ${{ success() }}  
+          echo "{\"text\":\"Build failed. Please look at $GITHUB_WORKFLOW_URL\"}" > mattermost.json
+        if: ${{ failure() }}
       - uses: mattermost/action-mattermost-notify@master
         env:
           MATTERMOST_WEBHOOK_URL: ${{ secrets.MATTERMOST_WEBHOOK_URL }}
