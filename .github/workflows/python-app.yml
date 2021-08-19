@@ -11,7 +11,7 @@ jobs:
       GITHUB_WORKFLOW_URL:  https://github.com/${{github.repository}}/actions/runs/${{github.run_id}}
     strategy:
       matrix:
-        python: [3.6, 3.7, 3.8, 3.9]
+        python: [3.6, 3.7, 3.8, 3.]
 
     steps:
       - uses: actions/checkout@v2
@@ -24,10 +24,10 @@ jobs:
       - name: Run Tox
         # Run tox using the version of Python in `PATH`
         run: tox -e py
-      - name: The job has succeeded         
+      - name: Mattermost Hook        
         run: |
           echo "{\"text\":\"Build failed. Please look at $GITHUB_WORKFLOW_URL\"}" > mattermost.json
-        if: ${{ failure() }}
       - uses: mattermost/action-mattermost-notify@master
         env:
           MATTERMOST_WEBHOOK_URL: ${{ secrets.MATTERMOST_WEBHOOK_URL }}
+        if: ${{ failure() }}
