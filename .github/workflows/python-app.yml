@@ -11,7 +11,7 @@ jobs:
       GITHUB_WORKFLOW_URL:  https://github.com/${{github.repository}}/actions/runs/${{github.run_id}}
     strategy:
       matrix:
-        python: [3.6, 3.7, 3.8, 3.]
+        python: [3.6, 3.7, 3.8, 3.9]
 
     steps:
       - uses: actions/checkout@v2
