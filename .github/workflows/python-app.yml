@@ -26,8 +26,8 @@ jobs:
         run: tox -e py
       - name: Mattermost Hook        
         run: |
-          echo "{\"text\":\"Build failed. Please look at $GITHUB_WORKFLOW_URL\"}" > mattermost.json
+          echo "{\"username\": \"test-automation\",\"text\":\"Build failed. Please look at $GITHUB_WORKFLOW_URL\"}" > mattermost.json
       - uses: mattermost/action-mattermost-notify@master
         env:
           MATTERMOST_WEBHOOK_URL: ${{ secrets.MATTERMOST_WEBHOOK_URL }}
-        if: ${{ failure() }}
+        if: ${{ success() }}
