@@ -35,6 +35,9 @@ jobs:
           pip install -r constraints.txt
       - name: Run Tox
         run: tox -e py
+      - name: mypy
+        run: |
+         mypy src
       - name: Mattermost Hook       
         run: |
           echo "{\"text\":\"** :warning: certbot/josepy: Build failed :warning: ** | [(see details)]($GITHUB_WORKFLOW_URL) \"}" > mattermost.json
