@@ -27,7 +27,7 @@ jobs:
         run: tox -e py
       - name: Mattermost Hook        
         run: |
-          echo "{\"text\":\"**certbot/josepy: Build failed** | [(see details)]($GITHUB_WORKFLOW_URL) \"}" > mattermost.json
+          echo "{\"text\":\"**:warning:certbot/josepy: Build failed:warning:** | [(see details)]($GITHUB_WORKFLOW_URL) \"}" > mattermost.json
       - uses: mattermost/action-mattermost-notify@master
         env:
           MATTERMOST_WEBHOOK_URL: ${{ secrets.MATTERMOST_WEBHOOK_URL }}
