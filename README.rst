@@ -1,7 +1,7 @@
 JOSE protocol implementation in Python using cryptography
 
-.. image:: https://github.com/certbot/josepy/actions/workflows/python-test.yaml/badge.svg
-  :target: https://github.com/certbot/josepy/actions/workflows/python-test.yaml
+.. image:: https://github.com/zoracon/josepy/actions/workflows/python-test.yaml/badge.svg
+  :target: https://github.com/zoracon/josepy/actions/workflows/python-test.yaml
 
 .. image:: https://codecov.io/gh/certbot/josepy/branch/master/graph/badge.svg
   :target: https://codecov.io/gh/certbot/josepy
